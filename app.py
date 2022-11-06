@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands
 from discord import Color   
+import os
 
-token = "MTAzODEzNzMwODE5MDM1MTQzMg.GlOBYO.5DVOqxzzgu6EJFm9WaXOFFuPCEJJxDudKCLOGI"
+token = os.getenv("TOKEN")
 
 intents = discord.Intents.all()  # or .all() if you ticked all, that is easier
 
