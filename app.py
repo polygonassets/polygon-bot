@@ -6,7 +6,7 @@ import requests
 import urllib.request
 from bs4 import BeautifulSoup
 
-token = "MTAzODEzNzMwODE5MDM1MTQzMg.GoFxfJ.-8zzAQzqltctEavFUJduybhOFOrkDPqvsMTJwI"
+token = os.getenv("TOKEN")
 
 intents = discord.Intents.all()  # or .all() if you ticked all, that is easier
 
