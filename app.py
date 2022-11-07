@@ -20,14 +20,14 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     count = len([m for m in member.guild.members if not m.bot])
-    channel = client.get_channel("")
+    channel = client.get_channel(1037055015912742952)
     await channel.edit(name=f"Member Count: {count}")
 
 @client.event
 async def on_member_leave(member):
     count = len([m for m in member.guild.members if not m.bot])
     channel = client.get_channel(1037055015912742952)
-    await client.edit_channel(channel, f"Member Count: {count}")
+    await channel.edit(name=f"Member Count: {count}")
 
 
 @client.command()
