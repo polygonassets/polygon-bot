@@ -3,7 +3,6 @@ from discord.ext import commands
 from discord import Color   
 import os
 import requests
-import urllib.request
 from bs4 import BeautifulSoup
 
 token = os.getenv("TOKEN")
@@ -16,6 +15,19 @@ client = commands.Bot(command_prefix="p!", intents=intents)
 @client.event
 async def on_ready():
     print("Polygon Bot Initialized!")
+
+
+@client.event
+async def on_member_join(member):
+    count = len([m for m in member.guild.members if not m.bot])
+    channel = client.get_channel("")
+    await client.edit_channel(channel, f"Member Count: {count}")
+
+@client.event
+async def on_member_leave(member):
+    count = len([m for m in member.guild.members if not m.bot])
+    channel = client.get_channel("1037055015912742952")
+    await client.edit_channel(channel, f"Member Count: {count}")
 
 
 @client.command()
