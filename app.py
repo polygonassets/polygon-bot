@@ -2,8 +2,11 @@ import discord
 from discord.ext import commands
 from discord import Color   
 import os
+import requests
+import urllib.request
+from bs4 import BeautifulSoup
 
-token = os.getenv("TOKEN")
+token = "MTAzODEzNzMwODE5MDM1MTQzMg.GoFxfJ.-8zzAQzqltctEavFUJduybhOFOrkDPqvsMTJwI"
 
 intents = discord.Intents.all()  # or .all() if you ticked all, that is easier
 
@@ -79,6 +82,23 @@ async def coms(ctx):
 
     reaction = await client.wait_for("reaction_add", check=check)
     await message.delete()
+
+
+@client.command()
+@commands.has_permissions(administrator=True)
+async def reviews(ctx, link):
+    response = requests.get(link)
+    soup = BeautifulSoup(response.text, "html.parser")
+    souped = str(soup.findAll('div')).split("</div>")
+    nameS = str(str(soup.find_all("h1")).split('">')[1]).split("</h1")[0]
+    print(soup.find_all("h1"))
+    await ctx.message.delete()
+    for st in souped:
+        if str(st).find('class="NoXio"') > 0 and str(st).find('">(') > 0:
+            new_st = str(st).split('">')[1]
+            await ctx.send(f"**{nameS}'s** Review Count: {new_st}")
+            return
+    await ctx.send("Couldn't retrieve the reviews!")
 
 
 @client.command()
